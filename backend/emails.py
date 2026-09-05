@@ -8,6 +8,7 @@ import os
 import smtplib
 import asyncio
 import logging
+import resend
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from typing import Optional
@@ -17,6 +18,23 @@ log = logging.getLogger("emails")
 
 def _smtp_configured() -> bool:
     return all(os.environ.get(k) for k in ("SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASS", "SMTP_FROM"))
+
+
+def _resend_configured() -> bool:
+    return bool(os.environ.get("RESEND_API_KEY"))
+
+
+def _do_send_resend(to: str, subject: str, html: str, text_body: str) -> dict:
+    """Blocking Resend API call. Run in a thread from async code."""
+    try:
+        resend.api_key = os.environ["RESEND_API_KEY"]
+        sender = os.environ.get("SENDER_EMAIL") or "onboarding@resend.dev"
+        res = resend.Emails.send({"from": sender, "to": [to], "subject": subject, "html": html, "text": text_body})
+        log.info(f"Email sent via Resend to {to}: {subject} (id={res.get('id') if isinstance(res, dict) else res})")
+        return {"sent": True, "mode": "resend"}
+    except Exception as e:
+        log.error(f"Resend send failed: {e}")
+        return {"sent": False, "mode": "resend", "error": str(e)}
 
 
 def _do_send_smtp(to: str, subject: str, html: str, text_body: str) -> dict:
@@ -50,6 +68,8 @@ def send_email(to: str, subject: str, html: str, text: Optional[str] = None) -> 
     Returns {sent: bool, mode: 'smtp'|'log', error?: str}.
     """
     text_body = text or html
+    if _resend_configured():
+        return _do_send_resend(to, subject, html, text_body)
     if not _smtp_configured():
         log.info("=" * 70)
         log.info(f"[EMAIL — DEV MODE, would send to] {to}")
@@ -63,6 +83,8 @@ def send_email(to: str, subject: str, html: str, text: Optional[str] = None) -> 
 async def send_email_async(to: str, subject: str, html: str, text: Optional[str] = None) -> dict:
     """Non-blocking wrapper — offloads SMTP send to a thread so it never stalls the event loop."""
     text_body = text or html
+    if _resend_configured():
+        return await asyncio.to_thread(_do_send_resend, to, subject, html, text_body)
     if not _smtp_configured():
         # DEV mode is pure logging — safe to inline
         return send_email(to, subject, html, text)

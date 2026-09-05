@@ -8,7 +8,7 @@ import HeroCarousel from "@/components/HeroCarousel";
 import { useAuth } from "@/context/AuthContext";
 import { useI18n } from "@/context/I18nContext";
 import { toast } from "sonner";
-import { FaSearch, FaExternalLinkAlt, FaSync, FaCalendarAlt, FaBriefcase, FaClock, FaChevronRight, FaGraduationCap, FaBuilding, FaFileAlt, FaGlobe, FaShareAlt, FaBookmark, FaRegBookmark, FaMapMarkerAlt, FaWhatsapp, FaUsers, FaArrowRight } from "react-icons/fa";
+import { FaSearch, FaExternalLinkAlt, FaSync, FaCalendarAlt, FaBriefcase, FaClock, FaChevronRight, FaGraduationCap, FaBuilding, FaFileAlt, FaGlobe, FaShareAlt, FaBookmark, FaRegBookmark, FaMapMarkerAlt, FaWhatsapp, FaUsers, FaArrowRight, FaTimes } from "react-icons/fa";
 import { WHATSAPP_CHANNEL_URL } from "@/lib/whatsapp";
 import ShareModal from "@/components/poster/ShareModal";
 import SEO from "@/components/SEO";
@@ -178,6 +178,9 @@ const Vacancies = () => {
       return next;
     });
   };
+
+  const activeFilters = [category !== "all", qualification !== "all", state !== "all", mode !== "all", !!q].filter(Boolean).length;
+  const clearFilters = () => { setCategory("all"); setQualification("all"); setState("all"); setMode("all"); setQ(""); setPage(1); };
 
   const load = async () => {
     setLoading(true);
@@ -403,7 +406,7 @@ const Vacancies = () => {
             </form>
             <select
               value={qualification}
-              onChange={(e) => { setQualification(e.target.value); if (e.target.value !== "all") { setCategory("all"); setState("all"); } }}
+              onChange={(e) => { setQualification(e.target.value); setPage(1); }}
               className="input md:w-56"
               data-testid="vacancies-qualification-filter"
             >
@@ -413,7 +416,7 @@ const Vacancies = () => {
             </select>
             <select
               value={category}
-              onChange={(e) => { setCategory(e.target.value); setState("all"); setQualification("all"); scrollToList(); }}
+              onChange={(e) => { setCategory(e.target.value); setPage(1); scrollToList(); }}
               className="input md:w-48"
               data-testid="vacancies-category-filter"
             >
@@ -423,7 +426,7 @@ const Vacancies = () => {
             </select>
             <select
               value={state}
-              onChange={(e) => { setState(e.target.value); setCategory("all"); setQualification("all"); scrollToList(); }}
+              onChange={(e) => { setState(e.target.value); setPage(1); scrollToList(); }}
               className="input md:w-48"
               data-testid="vacancies-state-filter"
             >
@@ -432,6 +435,17 @@ const Vacancies = () => {
               ))}
             </select>
           </div>
+          {activeFilters > 0 && (
+            <div className="relative flex items-center justify-between gap-3 flex-wrap text-xs" data-testid="vacancies-active-filters">
+              <span className="text-slate-400">
+                {lang === "hi" ? `${activeFilters} फ़िल्टर लागू` : `${activeFilters} filter${activeFilters > 1 ? "s" : ""} applied`}
+                {!loading && <> · {lang === "hi" ? `${total} भर्तियाँ मिलीं` : `${total} vacancies found`}</>}
+              </span>
+              <button type="button" onClick={clearFilters} className="chip !mt-0 hover:!bg-red-500/10 hover:!text-red-400 hover:!border-red-500/30" data-testid="vacancies-clear-filters">
+                <FaTimes className="text-[10px]" /> {lang === "hi" ? "सभी फ़िल्टर हटाएँ" : "Remove all filters"}
+              </button>
+            </div>
+          )}
 
         </div>
       </div>

@@ -128,7 +128,7 @@ const Header = () => {
           <a href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-bold !py-2 !px-4 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] text-white transition" data-testid="header-join-whatsapp-button">
             <FaWhatsapp /> {lang === "hi" ? "WhatsApp चैनल" : "WhatsApp Channel"}
           </a>
-          <a href="tel:8168762016" className="btn-mint text-sm !py-2 !px-4" data-testid="topbar-contact-btn">
+          <a href={`https://wa.me/918168762016?text=${encodeURIComponent(lang === "hi" ? "नमस्ते, मुझे फ्री रूफटॉप सोलर सर्वे बुक करना है। कृपया संपर्क करें।" : "Hello, I want to book a free rooftop solar survey. Please contact me.")}`} target="_blank" rel="noreferrer" className="btn-mint text-sm !py-2 !px-4" data-testid="topbar-contact-btn">
             <FaHeadset /> {lang === "hi" ? "फ्री सर्वे बुक करें" : "Book Free Survey"}
           </a>
         </div>
