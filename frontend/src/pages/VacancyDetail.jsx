@@ -8,6 +8,7 @@ import {
   FaUsers, FaRupeeSign, FaMoneyBillWave, FaListUl, FaMapMarkerAlt, FaUserCheck,
   FaWhatsapp,
 } from "react-icons/fa";
+import SocialShare from "@/components/SocialShare";
 import { toast } from "sonner";
 import ShareModal from "@/components/poster/ShareModal";
 import WhatsAppSummaryCard from "@/components/WhatsAppSummaryCard";
@@ -196,6 +197,8 @@ const VacancyDetail = () => {
           </button>
         </div>
       </div>
+
+      <SocialShare title={v.post_name || v.title} text={v.organization || ""} lang={lang} className="mb-4" />
 
       {/* Bright Last-Date Reminder / Expired banner — first thing users see */}
       {expired ? (

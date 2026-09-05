@@ -7,6 +7,7 @@ import Reviews from "@/components/Reviews";
 import ChannelLinks from "@/components/ChannelLinks";
 import { useI18n } from "@/context/I18nContext";
 import { FaWhatsapp, FaCalendarAlt, FaUser, FaNewspaper } from "react-icons/fa";
+import SocialShare from "@/components/SocialShare";
 import { WHATSAPP_CHANNEL_URL } from "@/lib/whatsapp";
 
 import { BACKEND_URL as BACKEND } from "@/lib/api";
@@ -64,6 +65,8 @@ const BlogDetail = () => {
           {new Date(blog.created_at).toLocaleDateString(hi ? "hi-IN" : "en-IN", { day: "numeric", month: "long", year: "numeric" })}
         </span>
       </div>
+
+      <SocialShare title={blog.title} text={blog.excerpt || ""} lang={lang} className="mt-4" />
 
       <article className="vacancy-article mt-8" dangerouslySetInnerHTML={{ __html: blog.content }} data-testid="blog-detail-content" />
 

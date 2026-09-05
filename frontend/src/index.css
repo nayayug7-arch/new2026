@@ -1246,3 +1246,7 @@ body.light-theme .footer-bottom { border-color: #e2e8f0; }
 body.light-theme .footer-main .text-slate-500 { color: #64748b !important; }
 body.has-theme .footer-main { background: var(--bg-2); border-color: var(--border); }
 body.has-theme .footer-bottom { border-color: var(--border); }
+
+/* Social share buttons — brand colour on hover */
+.social-share-btn { cursor: pointer; }
+.social-share-btn:hover { color: #fff !important; background: var(--share-c) !important; border-color: var(--share-c) !important; transform: translateY(-1px); }
