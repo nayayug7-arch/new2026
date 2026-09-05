@@ -307,7 +307,7 @@ const Vacancies = () => {
           </div>
           <PushSubscribeButton lang={lang} />
         </div>
-        <div className="glass-strong px-4 sm:px-5 py-5 rounded-b-2xl shadow-[0_28px_56px_-30px_rgba(0,0,0,0.6)] ring-1 ring-white/5">
+        <div className="glass-strong px-4 sm:px-5 py-5 rounded-b-2xl shadow-[0_10px_28px_-20px_rgba(15,23,42,0.25)]">
           {latestJobs.length === 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {[...Array(9)].map((_, i) => <div key={i} className="h-28 rounded-2xl bg-white/5 animate-pulse" />)}
@@ -388,7 +388,7 @@ const Vacancies = () => {
       </div>
 
       {/* Search + Filters — premium panel with subtle gradient border */}
-      <div className="relative rounded-2xl p-[1px] bg-gradient-to-br from-emerald-500/30 via-transparent to-amber-500/20 mb-6" data-testid="vacancies-filter-panel">
+      <div className="relative rounded-2xl p-[1px] bg-gradient-to-br from-emerald-500/15 via-transparent to-emerald-500/10 mb-6" data-testid="vacancies-filter-panel">
         <div className="glass-strong rounded-2xl p-5 space-y-4 relative overflow-hidden">
           <div className="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-emerald-500/8 blur-3xl pointer-events-none"></div>
           <div className="absolute -bottom-24 -left-24 w-64 h-64 rounded-full bg-amber-500/8 blur-3xl pointer-events-none"></div>

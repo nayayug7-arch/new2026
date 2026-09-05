@@ -209,7 +209,8 @@ body.harmony.light-theme .nu-card {
 }
 
 /* filter panel gradient border → subtle */
-body.harmony .from-emerald-500\/30 { --tw-gradient-from: color-mix(in srgb, var(--emerald) 22%, transparent) var(--tw-gradient-from-position) !important; }
+body.harmony .from-emerald-500\/30,
+body.harmony .from-emerald-500\/15 { --tw-gradient-from: color-mix(in srgb, var(--emerald) 12%, transparent) var(--tw-gradient-from-position) !important; }
 
 /* status pill / a11y buttons follow theme softly */
 body.harmony .status-pill {
