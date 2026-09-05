@@ -46,11 +46,12 @@ const companions = (hex, light) => {
 // Harmony preview: ?preview=harmony turns it on for this tab, ?preview=off turns it off.
 export const HARMONY_KEY = "harmonyPreview";
 const readHarmonyFlag = () => {
-  if (typeof window === "undefined") return false;
+  if (typeof window === "undefined") return true;
   const p = new URLSearchParams(window.location.search).get("preview");
   if (p === "harmony") sessionStorage.setItem(HARMONY_KEY, "1");
-  if (p === "off") sessionStorage.removeItem(HARMONY_KEY);
-  return sessionStorage.getItem(HARMONY_KEY) === "1";
+  if (p === "off") { sessionStorage.setItem(HARMONY_KEY, "0"); return false; }
+  const v = sessionStorage.getItem(HARMONY_KEY);
+  return v === null ? true : v === "1";
 };
 
 const resolveTheme = (theme) =>
