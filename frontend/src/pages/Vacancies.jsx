@@ -420,7 +420,7 @@ const Vacancies = () => {
               className="input md:w-48"
               data-testid="vacancies-category-filter"
             >
-              {Object.entries(CAT_LABELS).map(([k, v]) => (
+              {Object.entries(CAT_LABELS).filter(([k]) => k !== "haryana").map(([k, v]) => (
                 <option key={k} value={k}>{lang === "hi" ? v.hi : v.en}</option>
               ))}
             </select>
