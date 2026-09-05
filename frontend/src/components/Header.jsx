@@ -125,7 +125,7 @@ const Header = () => {
 
           <div className="flex-1"></div>
 
-          <a href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-bold !py-2 !px-4 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] text-white shadow-lg shadow-emerald-500/20 transition" data-testid="header-join-whatsapp-button">
+          <a href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-sm font-bold !py-2 !px-4 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] text-white transition" data-testid="header-join-whatsapp-button">
             <FaWhatsapp /> {lang === "hi" ? "WhatsApp चैनल" : "WhatsApp Channel"}
           </a>
           <a href="tel:8168762016" className="btn-mint text-sm !py-2 !px-4" data-testid="topbar-contact-btn">

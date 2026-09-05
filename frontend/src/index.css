@@ -1168,3 +1168,17 @@ body:not(.light-theme) .nu-sub { color: #94a3b8; }
 body:not(.light-theme) .nu-pill { background: rgba(16, 185, 129, 0.16); color: #34d399; }
 body:not(.light-theme) .nu-arrow { color: #34d399; }
 
+
+/* ─────── Hover-only elevation: cards & panels sit flat, shadow appears on mouse-over ─────── */
+.glass, .glass-strong, .nu-card, .stat-card, .app-card, .service-card, .svc-card, .signin-card, .detail-row {
+  box-shadow: none !important;
+  transition: box-shadow 0.22s ease, transform 0.18s ease, border-color 0.18s ease, background-color 0.18s ease;
+}
+.glass:hover, .glass-strong:hover, .nu-card:hover, .stat-card:hover, .app-card:hover, .service-card:hover, .svc-card:hover, .signin-card:hover {
+  box-shadow: 0 14px 30px -18px rgba(15, 23, 42, 0.28) !important;
+}
+body:not(.light-theme) .glass:hover, body:not(.light-theme) .glass-strong:hover, body:not(.light-theme) .nu-card:hover,
+body:not(.light-theme) .stat-card:hover, body:not(.light-theme) .app-card:hover, body:not(.light-theme) .service-card:hover,
+body:not(.light-theme) .svc-card:hover, body:not(.light-theme) .signin-card:hover {
+  box-shadow: 0 16px 34px -18px rgba(0, 0, 0, 0.6) !important;
+}

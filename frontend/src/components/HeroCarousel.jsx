@@ -39,7 +39,7 @@ const HeroCarousel = () => {
   );
 
   return (
-    <div className="relative mb-6 rounded-2xl overflow-hidden border border-emerald-400/20 shadow-2xl shadow-emerald-900/20 h-52 sm:h-64 md:h-80" data-testid="hero-carousel">
+    <div className="relative mb-6 rounded-2xl overflow-hidden border border-emerald-400/20 h-52 sm:h-64 md:h-80" data-testid="hero-carousel">
       {s.link ? (
         <a href={s.link} target="_blank" rel="noreferrer" className="block absolute inset-0" data-testid="carousel-link">{Inner}</a>
       ) : Inner}

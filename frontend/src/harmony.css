@@ -52,9 +52,9 @@ body.harmony .app-card {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: 1px solid var(--border) !important;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 14px 34px -22px var(--shadow-c) !important;
 }
 body.harmony .glass { border-radius: 18px; }
+body.harmony .glass:hover, body.harmony .glass-strong:hover, body.harmony .nu-card:hover { box-shadow: 0 14px 34px -20px var(--shadow-c) !important; }
 body.harmony .top-strip {
   background: color-mix(in srgb, var(--bg-2) 92%, transparent) !important;
   backdrop-filter: blur(8px);
@@ -205,7 +205,6 @@ body:not(.light-theme).harmony .nu-card:hover { border-color: color-mix(in srgb,
 body.harmony.light-theme .nu-card {
   background: #ffffff !important;
   border-color: color-mix(in srgb, var(--emerald) 14%, #e5e7eb) !important;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 12px 28px -22px color-mix(in srgb, var(--emerald) 45%, transparent) !important;
 }
 
 /* filter panel gradient border → subtle */
