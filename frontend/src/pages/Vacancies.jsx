@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import api from "@/lib/api";
 import JobAlertSubscribe from "@/components/JobAlertSubscribe";
+import OrgAvatar from "@/components/OrgAvatar";
 import PushSubscribeButton from "@/components/PushSubscribeButton";
 import HeroCarousel from "@/components/HeroCarousel";
 import { useAuth } from "@/context/AuthContext";
@@ -329,7 +330,7 @@ const Vacancies = () => {
                     data-testid={`new-update-${i}`}
                   >
                     <div className="flex items-start gap-3">
-                      <span className="nu-icon"><FaBriefcase /></span>
+                      <OrgAvatar name={v.organization || v.post_name || v.title} />
                       <div className="min-w-0 flex-1">
                         <div className="nu-title line-clamp-2">{v.post_name || v.title}</div>
                         <div className="nu-sub line-clamp-2 mt-1">

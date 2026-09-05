@@ -214,10 +214,8 @@ body.has-theme .stat-emerald {
 }
 body.has-theme .stat-emerald .stat-value { color: var(--emerald-glow) !important; }
 /* new-updates cards */
-body.has-theme .nu-icon,
 body.has-theme .nu-pill { background: var(--emerald-soft) !important; color: var(--emerald) !important; }
 body.has-theme .nu-arrow { color: var(--emerald) !important; }
-body:not(.light-theme).has-theme .nu-icon,
 body:not(.light-theme).has-theme .nu-pill { color: var(--emerald-glow) !important; }
 body:not(.light-theme).has-theme .nu-arrow { color: var(--emerald-glow) !important; }
 /* fee rows & article accents */
