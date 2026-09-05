@@ -100,7 +100,13 @@ const JobAlertSubscribe = () => {
             </div>
           </div>
         </div>
-        <span className="text-emerald-400 text-xs font-semibold shrink-0 ml-2">
+        <span
+          className={expanded
+            ? "chip !mt-0 shrink-0 ml-2"
+            : "wa-pop btn-mint !py-2 !px-4 !text-xs !rounded-full shrink-0 ml-2"}
+          data-testid="job-alert-subscribe-cta"
+        >
+          {!expanded && <FaBell className="text-[11px]" />}
           {expanded ? (lang === "hi" ? "बंद करें" : "Hide") : (lang === "hi" ? "सब्सक्राइब करें" : "Subscribe")}
         </span>
       </button>
