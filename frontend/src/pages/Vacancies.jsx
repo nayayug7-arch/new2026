@@ -289,23 +289,25 @@ const Vacancies = () => {
 
       {/* New Updates — latest vacancies quick list */}
       <div className="mb-6 rounded-2xl overflow-hidden border border-emerald-400/20 shadow-[0_8px_24px_-18px_rgba(15,23,42,0.2)]" data-testid="new-updates-section">
-        <div className="relative bg-gradient-to-r from-[#065f46] via-[#059669] to-[#10b981] px-5 py-3.5 flex items-center justify-between gap-3 flex-wrap overflow-hidden">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_120%,rgba(255,255,255,0.15),transparent_50%)] pointer-events-none"></div>
+        <div className="glass !rounded-none !border-x-0 !border-t-0 px-5 py-3.5 flex items-center justify-between gap-3 flex-wrap">
           <div className="relative flex items-center gap-3">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-            </span>
+            <div className="relative w-10 h-10 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+              <FaBriefcase />
+              <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+              </span>
+            </div>
             <div>
               <h2 className="font-display text-white font-extrabold text-lg sm:text-xl leading-tight tracking-tight">
                 {lang === "hi" ? "नई अपडेट्स" : "New Updates"}
               </h2>
-              <p className="text-emerald-100/90 text-[11px] sm:text-xs">
+              <p className="text-slate-400 text-[11px] sm:text-xs">
                 {lang === "hi" ? "आज की ताज़ा सरकारी भर्ती notifications — पूरे भारत से" : "Today's latest government job notifications across India"}
               </p>
             </div>
           </div>
-          <PushSubscribeButton lang={lang} />
+          <PushSubscribeButton lang={lang} className="!bg-emerald-500/10 !border-emerald-500/30 text-emerald-400 hover:!bg-emerald-500/20" />
         </div>
         <div className="glass-strong px-4 sm:px-5 py-5 rounded-b-2xl shadow-[0_10px_28px_-20px_rgba(15,23,42,0.25)]">
           {latestJobs.length === 0 ? (

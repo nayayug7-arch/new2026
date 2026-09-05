@@ -241,3 +241,11 @@ body:not(.light-theme) .nu-card .nu-pill { color: #e5e7eb !important; }
 /* filter-panel hairline gradient border (subtle) */
 body.has-theme .from-emerald-500\/15 { --tw-gradient-from: color-mix(in srgb, var(--emerald) 15%, transparent) var(--tw-gradient-from-position) !important; }
 body.has-theme .to-emerald-500\/10 { --tw-gradient-to: color-mix(in srgb, var(--emerald) 10%, transparent) var(--tw-gradient-to-position) !important; }
+
+/* important-variant utilities used on chips / push button */
+body.has-theme .\!bg-emerald-500\/10 { background-color: color-mix(in srgb, var(--emerald) 10%, transparent) !important; }
+body.has-theme .\!bg-emerald-500\/15,
+body.has-theme .hover\:\!bg-emerald-500\/15:hover { background-color: color-mix(in srgb, var(--emerald) 15%, transparent) !important; }
+body.has-theme .hover\:\!bg-emerald-500\/20:hover { background-color: color-mix(in srgb, var(--emerald) 20%, transparent) !important; }
+body.has-theme .\!border-emerald-500\/30 { border-color: color-mix(in srgb, var(--emerald) 30%, transparent) !important; }
+body.has-theme .\!text-emerald-300 { color: var(--emerald-glow) !important; }
