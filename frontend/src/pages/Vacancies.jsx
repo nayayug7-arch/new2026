@@ -376,15 +376,15 @@ const Vacancies = () => {
 
       {/* WhatsApp Channel banner */}
       <div className="mb-6 rounded-2xl bg-gradient-to-r from-[#075E54] via-[#128C7E] to-[#25D366] p-[1px]" data-testid="whatsapp-banner">
-        <div className="rounded-2xl bg-black/30 backdrop-blur px-5 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="rounded-2xl bg-[#25D366] px-5 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <span className="w-10 h-10 rounded-full bg-[#25D366] text-white grid place-items-center text-xl shrink-0"><FaWhatsapp /></span>
+            <span className="w-10 h-10 rounded-full bg-white text-[#075E54] grid place-items-center text-xl shrink-0"><FaWhatsapp /></span>
             <div>
               <div className="text-white font-bold text-sm">{lang === "hi" ? "हर नई भर्ती की Instant Alert" : "Instant Alerts for Every New Vacancy"}</div>
-              <div className="text-emerald-100/80 text-xs">{lang === "hi" ? "WhatsApp चैनल join करें — summary सीधे आपके phone पर" : "Join our WhatsApp Channel — summaries straight to your phone"}</div>
+              <div className="text-white/80 text-xs">{lang === "hi" ? "WhatsApp चैनल join करें — summary सीधे आपके phone पर" : "Join our WhatsApp Channel — summaries straight to your phone"}</div>
             </div>
           </div>
-          <a href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noreferrer" className="shrink-0 inline-flex items-center gap-2 bg-white text-[#075E54] text-sm font-extrabold px-5 py-2.5 rounded-full hover:bg-emerald-50 transition" data-testid="banner-join-whatsapp-button">
+          <a href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noreferrer" className="wa-pop shrink-0 inline-flex items-center gap-2 bg-white text-[#075E54] text-sm font-extrabold px-5 py-2.5 rounded-full hover:bg-emerald-50" data-testid="banner-join-whatsapp-button">
             <FaWhatsapp /> {lang === "hi" ? "WhatsApp Channel Join करें" : "Join WhatsApp Channel"}
           </a>
         </div>
