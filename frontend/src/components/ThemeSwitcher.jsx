@@ -89,7 +89,12 @@ const ThemeSwitcher = () => {
               <span className="w-5 h-5 rounded-full grid place-items-center" style={{ background: "var(--emerald)" }}><FaCheck className="text-[9px]" style={{ color: contrast(curPrimary) }} /></span>
               {hi ? "थीम" : "Themes"}
             </span>
-            <FaChevronDown className="text-xs" style={{ color: "var(--muted)" }} />
+            <span className="flex items-center gap-2">
+              {typeof window !== "undefined" && sessionStorage.getItem("harmonyPreview") === "1" && (
+                <span className="harmony-badge" data-testid="harmony-preview-badge">Harmony</span>
+              )}
+              <FaChevronDown className="text-xs" style={{ color: "var(--muted)" }} />
+            </span>
           </div>
           {THEMES.filter((t) => t.group === "default").map((t) => <Row key={t.key} t={t} indent />)}
           <div className="my-1 border-t" style={{ borderColor: "var(--border)" }} />

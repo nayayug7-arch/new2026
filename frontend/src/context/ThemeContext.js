@@ -21,6 +21,38 @@ const darken = (hex, a) => { const [r, g, b] = hexToRgb(hex); return toHex([r * 
 const rgba = (hex, a) => { const [r, g, b] = hexToRgb(hex); return `rgba(${r},${g},${b},${a})`; };
 const isValidHex = (hex) => /^#?[0-9a-fA-F]{6}$/.test(hex || "") || /^#?[0-9a-fA-F]{3}$/.test(hex || "");
 
+const rgbToHsl = ([r, g, b]) => {
+  r /= 255; g /= 255; b /= 255;
+  const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2;
+  if (max === min) return [0, 0, l];
+  const d = max - min, s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+  let h = max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+  return [h * 60, s, l];
+};
+const hslToHex = (h, s, l) => {
+  h = ((h % 360) + 360) % 360;
+  const c = (1 - Math.abs(2 * l - 1)) * s, x = c * (1 - Math.abs(((h / 60) % 2) - 1)), m = l - c / 2;
+  const [r, g, b] = h < 60 ? [c, x, 0] : h < 120 ? [x, c, 0] : h < 180 ? [0, c, x] : h < 240 ? [0, x, c] : h < 300 ? [x, 0, c] : [c, 0, x];
+  return toHex([(r + m) * 255, (g + m) * 255, (b + m) * 255]);
+};
+// Soft warm + cool companions for a custom primary (harmony palette)
+const companions = (hex, light) => {
+  const [, s] = rgbToHsl(hexToRgb(hex));
+  const sat = Math.min(0.55, Math.max(0.35, s * 0.8));
+  const lum = light ? 0.42 : 0.66;
+  return [hslToHex(38, sat, lum), hslToHex(205, sat, lum)];
+};
+
+// Harmony preview: ?preview=harmony turns it on for this tab, ?preview=off turns it off.
+export const HARMONY_KEY = "harmonyPreview";
+const readHarmonyFlag = () => {
+  if (typeof window === "undefined") return false;
+  const p = new URLSearchParams(window.location.search).get("preview");
+  if (p === "harmony") sessionStorage.setItem(HARMONY_KEY, "1");
+  if (p === "off") sessionStorage.removeItem(HARMONY_KEY);
+  return sessionStorage.getItem(HARMONY_KEY) === "1";
+};
+
 const resolveTheme = (theme) =>
   theme === "system"
     ? (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
@@ -38,6 +70,7 @@ const applyToBody = (theme, primary) => {
   // emerald/green Tailwind utilities to the active accent (see themes.css).
   const themed = !["light", "dark"].includes(r) || (primary && isValidHex(primary));
   body.classList.toggle("has-theme", !!themed);
+  body.classList.toggle("harmony", readHarmonyFlag());
 
   // Primary color → override the emerald accent family (inline on body = wins over any rule)
   const s = body.style;
@@ -47,11 +80,16 @@ const applyToBody = (theme, primary) => {
     s.setProperty("--emerald-glow", lighten(p, 0.18));
     s.setProperty("--emerald-deep", darken(p, 0.14));
     s.setProperty("--emerald-soft", rgba(p, 0.12));
+    const [warm, cool] = companions(p, LIGHT_BASED.includes(r));
+    s.setProperty("--accent-2", warm);
+    s.setProperty("--accent-3", cool);
   } else {
     s.removeProperty("--emerald");
     s.removeProperty("--emerald-glow");
     s.removeProperty("--emerald-deep");
     s.removeProperty("--emerald-soft");
+    s.removeProperty("--accent-2");
+    s.removeProperty("--accent-3");
   }
 };
 

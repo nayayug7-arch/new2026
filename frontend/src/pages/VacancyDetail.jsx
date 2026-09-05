@@ -184,7 +184,7 @@ const VacancyDetail = () => {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setShareOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white text-xs font-bold shadow-lg shadow-emerald-500/30 transition-transform hover:scale-105 border border-emerald-300/40"
+            className="chip hover:!bg-emerald-500/15 hover:scale-105 transition-transform"
             data-testid="share-vacancy"
             title={lang === "hi" ? "पोस्टर बनाएँ और शेयर करें" : "Generate poster & share"}
           >

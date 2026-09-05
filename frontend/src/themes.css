@@ -233,3 +233,7 @@ body.has-theme ::selection { background: color-mix(in srgb, var(--emerald) 35%, 
 body.has-theme .from-\[\#065f46\] { --tw-gradient-from: var(--emerald-deep) var(--tw-gradient-from-position) !important; }
 body.has-theme .via-\[\#059669\] { --tw-gradient-stops: var(--tw-gradient-from), var(--emerald) var(--tw-gradient-via-position), var(--tw-gradient-to) !important; }
 body.has-theme .to-\[\#10b981\] { --tw-gradient-to: var(--emerald-glow) var(--tw-gradient-to-position) !important; }
+
+/* ---------- New-Updates pills: text black in light, light-grey in dark (all themes) ---------- */
+body.light-theme .nu-card .nu-pill { color: #0f172a !important; }
+body:not(.light-theme) .nu-card .nu-pill { color: #e5e7eb !important; }
