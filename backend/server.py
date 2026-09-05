@@ -1855,6 +1855,7 @@ async def get_site_settings():
     return {
         "ga4_id": doc.get("ga4_id", ""),
         "gsc_verification": doc.get("gsc_verification", ""),
+        "webpushr_key": doc.get("webpushr_key", ""),
         "channel_whatsapp": doc.get("channel_whatsapp", ""),
         "channel_telegram": doc.get("channel_telegram", ""),
         "channel_arattai": doc.get("channel_arattai", ""),
@@ -1875,7 +1876,7 @@ async def get_site_settings():
 
 @api.put("/admin/site-settings")
 async def update_site_settings(payload: dict = Body(...), _=Depends(require_admin)):
-    fields = ["ga4_id", "gsc_verification", "channel_whatsapp", "channel_telegram",
+    fields = ["ga4_id", "gsc_verification", "webpushr_key", "channel_whatsapp", "channel_telegram",
               "channel_arattai", "channel_youtube", "channel_instagram", "channel_app",
               "default_theme", "default_primary",
               "social_twitter", "social_facebook", "social_instagram", "social_youtube", "social_whatsapp"]

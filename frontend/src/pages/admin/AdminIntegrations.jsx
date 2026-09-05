@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { FaSearch, FaChartLine, FaExternalLinkAlt, FaSave, FaSitemap, FaRobot, FaGoogle, FaWhatsapp, FaTelegram, FaYoutube, FaInstagram, FaMobileAlt, FaComments, FaPalette } from "react-icons/fa";
+import { FaSearch, FaChartLine, FaExternalLinkAlt, FaSave, FaSitemap, FaRobot, FaGoogle, FaWhatsapp, FaTelegram, FaYoutube, FaInstagram, FaMobileAlt, FaComments, FaPalette, FaBell } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { adminApi } from "./adminAuth";
 import { BACKEND_URL } from "@/lib/api";
@@ -10,7 +10,7 @@ const inputCls =
 
 const AdminIntegrations = () => {
   const [form, setForm] = useState({
-    ga4_id: "", gsc_verification: "",
+    ga4_id: "", gsc_verification: "", webpushr_key: "",
     channel_whatsapp: "", channel_telegram: "", channel_arattai: "",
     channel_youtube: "", channel_instagram: "", channel_app: "",
     default_theme: "light", default_primary: "",
@@ -68,6 +68,24 @@ const AdminIntegrations = () => {
             <p className="text-xs text-slate-400 mt-1">Analytics → Admin → Data Streams → Web → Measurement ID (G-…). Save ke baad visitor tracking auto shuru ho jaayega.</p>
           </div>
           <LinkBtn href="https://analytics.google.com/" icon={FaChartLine} testid="ga-dashboard-link">Open Google Analytics</LinkBtn>
+        </div>
+      </div>
+
+      {/* Webpushr push notifications */}
+      <div className="bg-white rounded border border-slate-200 shadow-sm mb-5" data-testid="webpushr-card">
+        <div className="px-4 py-3 border-b border-slate-200 font-semibold text-slate-800 flex items-center gap-2"><FaBell className="text-blue-600" /> Push Notifications (Webpushr)</div>
+        <div className="p-4 space-y-3">
+          <div>
+            <label className="block text-[13px] font-semibold text-slate-700 mb-1">Webpushr Site Key</label>
+            <input value={form.webpushr_key || ""} onChange={(e) => setForm({ ...form, webpushr_key: e.target.value.trim() })}
+              placeholder="Webpushr → Setup → Integration → Site Key" className={inputCls} data-testid="webpushr-key-input" />
+            <p className="text-xs text-slate-400 mt-1">Free account https://app.webpushr.com par banayein → Setup me website add karein → "Site Key" copy karke yahan paste karein. Save ke baad homepage ka "Push Alerts पाएँ" button asli browser notifications chalu karega. Service worker <code>/webpushr-sw.js</code> pehle se site par hai.</p>
+          </div>
+          <div className="flex items-center gap-2 text-xs">
+            <span className={`inline-block w-2 h-2 rounded-full ${form.webpushr_key ? "bg-emerald-500" : "bg-slate-300"}`} />
+            <span className="text-slate-600" data-testid="webpushr-status">{form.webpushr_key ? "Push notifications: ACTIVE" : "Push notifications: inactive (key nahi hai)"}</span>
+          </div>
+          <LinkBtn href="https://app.webpushr.com/" icon={FaBell} testid="webpushr-dashboard-link">Open Webpushr</LinkBtn>
         </div>
       </div>
 

@@ -25,6 +25,23 @@ const SeoHead = () => {
           }
         }
 
+        // Webpushr push notifications (site key from admin panel)
+        if (data.webpushr_key && !window.__webpushrLoaded) {
+          window.__webpushrLoaded = true;
+          const key = String(data.webpushr_key).trim();
+          window.webpushr = window.webpushr || function () { (window.webpushr.q = window.webpushr.q || []).push(arguments); };
+          window._webpushrScriptReady = function () {
+            window.webpushr("fetch_id", function (sid) {
+              if (!sid) return;
+              fetch(`${BACKEND_URL}/api/webpushr/subscriber`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ subscriber_id: Number(sid) }) }).catch(() => {});
+            });
+          };
+          const js = document.createElement("script");
+          js.id = "webpushr-jssdk"; js.async = true; js.src = "https://cdn.webpushr.com/app.min.js";
+          document.head.appendChild(js);
+          window.webpushr("setup", { key });
+        }
+
         // Google Analytics (GA4)
         if (data.ga4_id && !window.__ga4Loaded) {
           window.__ga4Loaded = true;
