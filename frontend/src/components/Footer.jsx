@@ -51,7 +51,7 @@ const Footer = () => {
       </div>
 
       {/* Main footer */}
-      <div className="bg-[#070c0a] border-t border-white/5">
+      <div className="footer-main border-t">
         <div className="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-start gap-3 mb-4">
@@ -97,19 +97,14 @@ const Footer = () => {
             <div className="section-eyebrow">Contact</div>
             <ul className="space-y-2.5 text-sm mt-2">
               <li className="flex items-start gap-2 text-slate-300"><FaMapMarkerAlt className="mt-1 text-amber-400 shrink-0" /> <span>200 Mtr From Bus Stand, Begu–Bhadra Road, Kagdana, Sirsa, Haryana</span></li>
-              <li className="text-[10px] text-emerald-400 uppercase tracking-widest mt-2">Field Officers</li>
-              <li className="flex items-center gap-2 text-slate-300"><FaPhone className="text-amber-400" /> <a href="tel:9813664230" className="hover:text-emerald-400">Sanjay Fageria · 98136-64230</a></li>
-              <li className="flex items-center gap-2 text-slate-300"><FaPhone className="text-amber-400" /> <a href="tel:9097410008" className="hover:text-emerald-400">Anoop Beniwal · 90974-10008</a></li>
               <li className="text-[10px] text-emerald-400 uppercase tracking-widest mt-2">Office</li>
-              <li className="flex items-center gap-2 text-slate-300"><FaPhone className="text-amber-400" /> <a href="tel:9992120628" className="hover:text-emerald-400">99921-20628</a> · <a href="tel:9541435035" className="hover:text-emerald-400">95414-35035</a></li>
-              <li className="flex items-center gap-2 text-slate-300"><FaPhone className="text-amber-400" /> <a href="tel:8167862016" className="hover:text-emerald-400">8167862016</a></li>
-              <li className="flex items-center gap-2 text-slate-300"><FaWhatsapp className="text-emerald-400" /> <a href="https://wa.me/918168762016" target="_blank" rel="noreferrer" className="hover:text-emerald-400">8168762016</a></li>
-              <li className="flex items-start gap-2 text-slate-300"><FaEnvelope className="mt-1 text-amber-400 shrink-0" /> <a href="mailto:haryanaenterpriseskagdana@gmail.com" className="break-all hover:text-emerald-400">haryanaenterpriseskagdana@gmail.com</a></li>
+              <li className="flex items-center gap-2 text-slate-300"><FaPhone className="text-amber-400" /> <a href="tel:8168762016" className="hover:text-emerald-400" data-testid="footer-office-phone">8168762016</a></li>
+              <li className="flex items-start gap-2 text-slate-300"><FaEnvelope className="mt-1 text-amber-400 shrink-0" /> <a href="mailto:haryanaenterpriseskagdana@gmail.com" className="break-all hover:text-emerald-400" data-testid="footer-office-email">haryanaenterpriseskagdana@gmail.com</a></li>
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/5">
+        <div className="footer-bottom border-t">
           <div className="max-w-7xl mx-auto px-4 py-4 text-xs text-slate-500 flex flex-wrap items-center justify-between gap-2">
             <span>© {new Date().getFullYear()} {t(S.brand)}. {t({ hi: "सर्वाधिकार सुरक्षित।", en: "All rights reserved." })}</span>
             <span className="flex items-center gap-3">

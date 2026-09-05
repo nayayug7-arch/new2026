@@ -1237,3 +1237,12 @@ body.light-theme .wa-free-pill { background: #075E54; color: #ffffff; }
 }
 .btn-mint.wa-pop { animation: wa-pop 2.4s ease-in-out infinite, wa-ring-mint 2.4s ease-out infinite; }
 body.has-theme .btn-mint.wa-pop { animation-name: wa-pop; box-shadow: 0 0 0 4px color-mix(in srgb, var(--emerald) 25%, transparent) !important; }
+
+/* Footer main block — dark in dark mode, light in light mode */
+.footer-main { background: #070c0a; border-color: rgba(255, 255, 255, 0.05); }
+.footer-bottom { border-color: rgba(255, 255, 255, 0.05); }
+body.light-theme .footer-main { background: #f1f5f3; border-color: #e2e8f0; }
+body.light-theme .footer-bottom { border-color: #e2e8f0; }
+body.light-theme .footer-main .text-slate-500 { color: #64748b !important; }
+body.has-theme .footer-main { background: var(--bg-2); border-color: var(--border); }
+body.has-theme .footer-bottom { border-color: var(--border); }
