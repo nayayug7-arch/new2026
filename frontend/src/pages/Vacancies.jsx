@@ -271,7 +271,7 @@ const Vacancies = () => {
           <h1 className="section-title !text-3xl md:!text-4xl">
             {lang === "hi" ? (<>ताज़ा <span className="text-amber-400">सरकारी भर्तियाँ</span></>) : (<>Latest <span className="text-amber-400">Government Vacancies</span></>)}
           </h1>
-          <p className="text-slate-400 mt-2 text-sm">
+          <p className="hidden text-slate-400 mt-2 text-sm">
             {lang === "hi" ? "हर 1 घंटे में automatic update।" : "Auto-updated every hour."}
             {stats?.last_updated && (
               <span className="ml-2 text-emerald-400"><FaClock className="inline mr-1" /> {new Date(stats.last_updated).toLocaleString()}</span>
@@ -289,28 +289,25 @@ const Vacancies = () => {
       <JobAlertSubscribe />
 
       {/* New Updates — latest vacancies quick list */}
-      <div className="mb-6 rounded-2xl overflow-hidden border border-emerald-400/20" data-testid="new-updates-section">
-        <div className="glass !rounded-none !border-x-0 !border-t-0 px-5 py-3.5 flex items-center justify-between gap-3 flex-wrap">
+      <div className="glass mb-6 overflow-hidden" data-testid="new-updates-section">
+        <div className="px-5 pt-4 pb-1 flex items-center justify-between gap-3 flex-wrap">
           <div className="relative flex items-center gap-3">
-            <div className="relative w-10 h-10 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
-              <FaBriefcase />
-              <span className="absolute -top-0.5 -right-0.5 flex h-3 w-3">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-              </span>
-            </div>
             <div>
-              <h2 className="font-display text-white font-extrabold text-lg sm:text-xl leading-tight tracking-tight">
+              <h2 className="font-display text-white font-extrabold text-lg sm:text-xl leading-tight tracking-tight flex items-center gap-2">
+                <span className="relative flex h-2.5 w-2.5 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                </span>
                 {lang === "hi" ? "नई अपडेट्स" : "New Updates"}
               </h2>
-              <p className="text-slate-400 text-[11px] sm:text-xs">
+              <p className="text-slate-400 text-[11px] sm:text-xs pl-[18px]">
                 {lang === "hi" ? "आज की ताज़ा सरकारी भर्ती notifications — पूरे भारत से" : "Today's latest government job notifications across India"}
               </p>
             </div>
           </div>
           <PushSubscribeButton lang={lang} className="!bg-emerald-500/10 !border-emerald-500/30 text-emerald-400 hover:!bg-emerald-500/20" />
         </div>
-        <div className="glass-strong px-4 sm:px-5 py-5 rounded-b-2xl">
+        <div className="px-4 sm:px-5 py-4">
           {latestJobs.length === 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {[...Array(9)].map((_, i) => <div key={i} className="h-28 rounded-2xl bg-white/5 animate-pulse" />)}
@@ -376,11 +373,14 @@ const Vacancies = () => {
 
       {/* WhatsApp Channel banner */}
       <div className="mb-6 rounded-2xl bg-gradient-to-r from-[#075E54] via-[#128C7E] to-[#25D366] p-[1px]" data-testid="whatsapp-banner">
-        <div className="rounded-2xl bg-[#25D366] px-5 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <span className="w-10 h-10 rounded-full bg-white text-[#075E54] grid place-items-center text-xl shrink-0"><FaWhatsapp /></span>
+        <div className="wa-banner rounded-2xl px-5 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="relative flex items-center gap-3">
+            <span className="wa-banner-icon w-12 h-12 rounded-full bg-white text-[#075E54] grid place-items-center text-2xl shrink-0"><FaWhatsapp /></span>
             <div>
-              <div className="text-white font-bold text-sm">{lang === "hi" ? "हर नई भर्ती की Instant Alert" : "Instant Alerts for Every New Vacancy"}</div>
+              <div className="flex items-center gap-2 flex-wrap">
+                <div className="text-white font-extrabold text-sm sm:text-base">{lang === "hi" ? "हर नई भर्ती की Instant Alert" : "Instant Alerts for Every New Vacancy"}</div>
+                <span className="wa-free-pill">{lang === "hi" ? "FREE" : "FREE"}</span>
+              </div>
               <div className="text-white/80 text-xs">{lang === "hi" ? "WhatsApp चैनल join करें — summary सीधे आपके phone पर" : "Join our WhatsApp Channel — summaries straight to your phone"}</div>
             </div>
           </div>
