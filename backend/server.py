@@ -1863,6 +1863,13 @@ async def get_site_settings():
         "channel_app": doc.get("channel_app", ""),
         "default_theme": doc.get("default_theme", "light"),
         "default_primary": doc.get("default_primary", ""),
+        "social_twitter": doc.get("social_twitter", ""),
+        "social_facebook": doc.get("social_facebook", ""),
+        "social_instagram": doc.get("social_instagram", ""),
+        "social_youtube": doc.get("social_youtube", ""),
+        "social_whatsapp": doc.get("social_whatsapp", ""),
+        "theme_locked": bool(doc.get("theme_locked", False)),
+        "theme_updated_at": doc.get("theme_updated_at", ""),
     }
 
 
@@ -1870,11 +1877,20 @@ async def get_site_settings():
 async def update_site_settings(payload: dict = Body(...), _=Depends(require_admin)):
     fields = ["ga4_id", "gsc_verification", "channel_whatsapp", "channel_telegram",
               "channel_arattai", "channel_youtube", "channel_instagram", "channel_app",
-              "default_theme", "default_primary"]
+              "default_theme", "default_primary",
+              "social_twitter", "social_facebook", "social_instagram", "social_youtube", "social_whatsapp"]
     update = {}
     for f in fields:
         if f in payload:
             update[f] = str(payload.get(f) or "").strip()[:400]
+    if update.get("default_theme") and update["default_theme"] not in {"light", "dark", "system", "luxury", "retro", "arctic", "nature", "ember", "dracula", "midnight"}:
+        raise HTTPException(400, "Invalid theme")
+    if update.get("default_primary") and not re.fullmatch(r"#[0-9a-fA-F]{6}", update["default_primary"]):
+        raise HTTPException(400, "Primary colour must be #RRGGBB")
+    if "theme_locked" in payload:
+        update["theme_locked"] = bool(payload.get("theme_locked"))
+    if any(k in update for k in ("default_theme", "default_primary", "theme_locked")):
+        update["theme_updated_at"] = datetime.now(timezone.utc).isoformat()
     if update:
         await db.settings.update_one({"_id": "site"}, {"$set": update}, upsert=True)
     return {"ok": True, **update}

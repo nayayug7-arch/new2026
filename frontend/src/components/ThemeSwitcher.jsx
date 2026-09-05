@@ -27,7 +27,7 @@ const contrast = (hex) => {
 };
 
 const ThemeSwitcher = () => {
-  const { theme, setTheme, primary, setPrimary } = useTheme();
+  const { theme, setTheme, primary, setPrimary, locked } = useTheme();
   const { lang } = useI18n();
   const hi = lang === "hi";
   const [open, setOpen] = useState(false);
@@ -76,6 +76,8 @@ const ThemeSwitcher = () => {
       </button>
     );
   };
+
+  if (locked) return null;
 
   return (
     <div className="relative" ref={ref}>

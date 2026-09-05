@@ -105,20 +105,28 @@ export const ThemeProvider = ({ children }) => {
     return "light";
   });
   const [primary, setPrimaryState] = useState(() => localStorage.getItem("appPrimary") || "");
-  const [chosen] = useState(() => localStorage.getItem("appTheme") !== null);
+  const [locked, setLocked] = useState(false);
 
-  // First-time visitors: adopt the admin-configured site default.
+  // Admin-configured site theme goes LIVE for everyone: whenever the admin saves a new
+  // default (theme_updated_at changes) every visitor adopts it; if locked, it always wins.
   useEffect(() => {
-    if (chosen) return;
     api.get("/site-settings")
       .then((r) => {
         const dt = r.data?.default_theme;
-        const dp = r.data?.default_primary;
-        if (dt && THEME_KEYS.includes(dt)) setThemeState(dt);
-        if (dp) setPrimaryState(dp);
+        const dp = r.data?.default_primary || "";
+        const stamp = r.data?.theme_updated_at || "";
+        const isLocked = !!r.data?.theme_locked;
+        setLocked(isLocked);
+        const seen = localStorage.getItem("appThemeStamp") || "";
+        const chosen = localStorage.getItem("appTheme") !== null;
+        if (isLocked || !chosen || stamp !== seen) {
+          if (dt && THEME_KEYS.includes(dt)) { setThemeState(dt); localStorage.setItem("appTheme", dt); }
+          setPrimaryState(dp); localStorage.setItem("appPrimary", dp);
+          localStorage.setItem("appThemeStamp", stamp);
+        }
       })
       .catch(() => {});
-  }, [chosen]);
+  }, []);
 
   useEffect(() => { applyToBody(theme, primary); }, [theme, primary]);
 
@@ -150,7 +158,7 @@ export const ThemeProvider = ({ children }) => {
   const isLight = LIGHT_BASED.includes(resolveTheme(theme));
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme, primary, setPrimary, toggleLightDark, isLight }}>
+    <ThemeContext.Provider value={{ theme, setTheme, primary, setPrimary, toggleLightDark, isLight, locked }}>
       {children}
     </ThemeContext.Provider>
   );
@@ -158,6 +166,6 @@ export const ThemeProvider = ({ children }) => {
 
 export const useTheme = () => {
   const ctx = useContext(ThemeContext);
-  if (!ctx) return { theme: "light", setTheme: () => {}, primary: "", setPrimary: () => {}, toggleLightDark: () => {}, isLight: true };
+  if (!ctx) return { theme: "light", setTheme: () => {}, primary: "", setPrimary: () => {}, toggleLightDark: () => {}, isLight: true, locked: false };
   return ctx;
 };

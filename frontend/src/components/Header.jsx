@@ -15,7 +15,7 @@ import { WHATSAPP_CHANNEL_URL } from "@/lib/whatsapp";
 
 const Header = () => {
   const { lang, toggle, t } = useI18n();
-  const { toggleLightDark, isLight } = useTheme();
+  const { toggleLightDark, isLight, locked: themeLocked } = useTheme();
   const [open, setOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
 
@@ -80,9 +80,11 @@ const Header = () => {
             <button className="a11y-btn" onClick={toggle} data-testid="lang-toggle-btn" title="Language" aria-label="Language">
               <FaLanguage className="mr-1" /> {lang === "hi" ? "EN" : "हिं"}
             </button>
-            <button className="a11y-btn" onClick={toggleLightDark} data-testid="theme-toggle-btn" title="Light / Dark" aria-label="Light or Dark">
-              <FaAdjust />
-            </button>
+            {!themeLocked && (
+              <button className="a11y-btn" onClick={toggleLightDark} data-testid="theme-toggle-btn" title="Light / Dark" aria-label="Light or Dark">
+                <FaAdjust />
+              </button>
+            )}
             <ThemeSwitcher />
 
             <button className="lg:hidden a11y-btn" onClick={() => setOpen(v => !v)} data-testid="mobile-menu-toggle" aria-label="Menu">

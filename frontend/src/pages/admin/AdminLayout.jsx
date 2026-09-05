@@ -3,7 +3,7 @@ import { Outlet, Link, NavLink, useNavigate, Navigate } from "react-router-dom";
 import {
   FaTachometerAlt, FaThumbtack, FaSearch, FaEdit, FaSignOutAlt, FaHome,
   FaBriefcase, FaNewspaper, FaFileAlt, FaBars, FaChartLine, FaImages, FaStar,
-  FaMoon, FaRegSun, FaTimes,
+  FaMoon, FaRegSun, FaTimes, FaPalette,
 } from "react-icons/fa";
 import { getAdminToken, clearAdminToken } from "./adminAuth";
 import "./admin-theme.css";
@@ -30,6 +30,7 @@ const NAV = [
   {
     section: "Settings",
     items: [
+      { to: "/admin/site", label: "Site Theme & Links", icon: FaPalette, testid: "admin-nav-site" },
       { to: "/admin/job-seo", label: "Job SEO", icon: FaSearch, testid: "admin-nav-job-seo" },
       { to: "/admin/seo", label: "Site SEO", icon: FaNewspaper, testid: "admin-nav-seo" },
       { to: "/admin/content", label: "Front-page Text", icon: FaEdit, testid: "admin-nav-content" },

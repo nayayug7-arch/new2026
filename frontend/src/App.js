@@ -32,6 +32,7 @@ import BlogDetail from "@/pages/BlogDetail";
 import AdminLayout from "@/pages/admin/AdminLayout";
 import AdminLogin from "@/pages/admin/AdminLogin";
 import AdminHome from "@/pages/admin/AdminHome";
+import AdminSite from "@/pages/admin/AdminSite";
 import AdminSEO from "@/pages/admin/AdminSEO";
 import AdminContent from "@/pages/admin/AdminContent";
 import AdminVacancies from "@/pages/admin/AdminVacancies";
@@ -91,6 +92,7 @@ function AppRouter() {
         <Route path="blogs" element={<AdminBlogs />} />
         <Route path="resumes" element={<AdminResumes />} />
         <Route path="integrations" element={<AdminIntegrations />} />
+        <Route path="site" element={<AdminSite />} />
         <Route path="slides" element={<AdminSlides />} />
         <Route path="reviews" element={<AdminReviews />} />
         <Route path="search-analytics" element={<AdminSearchAnalytics />} />

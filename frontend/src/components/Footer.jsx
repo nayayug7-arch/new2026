@@ -1,13 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import api from "@/lib/api";
 import { useI18n } from "@/context/I18nContext";
 import { S } from "@/lib/strings";
 import Logo from "@/components/Logo";
 import { FaPhone, FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaYoutube, FaTwitter, FaClock, FaBell, FaLink } from "react-icons/fa";
 import { WHATSAPP_CHANNEL_URL } from "@/lib/whatsapp";
 
+const SOCIALS = [
+  { k: "social_facebook", label: "Facebook", Icon: FaFacebook },
+  { k: "social_twitter", label: "X (Twitter)", Icon: FaTwitter },
+  { k: "social_instagram", label: "Instagram", Icon: FaInstagram },
+  { k: "social_whatsapp", label: "WhatsApp", Icon: FaWhatsapp },
+  { k: "social_youtube", label: "YouTube", Icon: FaYoutube },
+];
+
 const Footer = () => {
   const { t, lang } = useI18n();
+  const [social, setSocial] = useState({});
+  useEffect(() => { api.get("/site-settings").then((r) => setSocial(r.data || {})).catch(() => {}); }, []);
   return (
     <footer className="mt-16" data-testid="site-footer">
       {/* Info bar (like the deployed screenshot) */}
@@ -33,11 +44,15 @@ const Footer = () => {
           </div>
           <div className="info-bar-item" data-testid="info-social">
             <h5><FaLink className="text-emerald-400" /> {lang === "hi" ? "जुड़े रहें" : "Stay Connected"}</h5>
-            <div className="flex gap-2 mt-1">
-              <a href="#" className="social-icon" aria-label="Twitter/X"><FaTwitter /></a>
-              <a href="#" className="social-icon" aria-label="Facebook"><FaFacebook /></a>
-              <a href="#" className="social-icon" aria-label="Instagram"><FaInstagram /></a>
-              <a href="#" className="social-icon" aria-label="YouTube"><FaYoutube /></a>
+            <div className="flex gap-2 mt-1" data-testid="footer-social-links">
+              {SOCIALS.map(({ k, label, Icon }) => {
+                const href = (social[k] || "").trim();
+                return href ? (
+                  <a key={k} href={href} target="_blank" rel="noreferrer" className="social-icon" aria-label={label} title={label} data-testid={`footer-${k}`}><Icon /></a>
+                ) : (
+                  <Link key={k} to="/" className="social-icon" aria-label={label} title={label} data-testid={`footer-${k}`}><Icon /></Link>
+                );
+              })}
             </div>
             <a href={WHATSAPP_CHANNEL_URL} target="_blank" rel="noreferrer" className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] text-white text-xs font-bold px-4 py-2 transition" data-testid="footer-join-whatsapp-button">
               <FaWhatsapp /> {lang === "hi" ? "WhatsApp चैनल Join करें" : "Join WhatsApp Channel"}
