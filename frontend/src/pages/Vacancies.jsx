@@ -296,12 +296,12 @@ const Vacancies = () => {
         <div className="px-5 pt-4 pb-1 flex items-center justify-between gap-3 flex-wrap">
           <div className="relative flex items-center gap-3">
             <div>
-              <h2 className="font-display text-white font-extrabold text-lg sm:text-xl leading-tight tracking-tight flex items-center gap-2">
+              <h2 className="section-title !text-xl sm:!text-2xl leading-tight flex items-center gap-2">
                 <span className="relative flex h-2.5 w-2.5 shrink-0">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
                 </span>
-                {lang === "hi" ? "नई अपडेट्स" : "New Updates"}
+                {lang === "hi" ? (<>नई <span className="text-amber-400">अपडेट्स</span></>) : (<>New <span className="text-amber-400">Updates</span></>)}
               </h2>
               <p className="text-slate-400 text-[11px] sm:text-xs pl-[18px]">
                 {lang === "hi" ? "आज की ताज़ा सरकारी भर्ती notifications — पूरे भारत से" : "Today's latest government job notifications across India"}
