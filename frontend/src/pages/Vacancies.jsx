@@ -288,7 +288,7 @@ const Vacancies = () => {
       <JobAlertSubscribe />
 
       {/* New Updates — latest vacancies quick list */}
-      <div className="mb-6 rounded-2xl overflow-hidden border border-emerald-400/20 shadow-2xl shadow-emerald-900/20" data-testid="new-updates-section">
+      <div className="mb-6 rounded-2xl overflow-hidden border border-emerald-400/20 shadow-[0_8px_24px_-18px_rgba(15,23,42,0.2)]" data-testid="new-updates-section">
         <div className="relative bg-gradient-to-r from-[#065f46] via-[#059669] to-[#10b981] px-5 py-3.5 flex items-center justify-between gap-3 flex-wrap overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_120%,rgba(255,255,255,0.15),transparent_50%)] pointer-events-none"></div>
           <div className="relative flex items-center gap-3">
