@@ -472,7 +472,7 @@ const Vacancies = () => {
                 <button
                   type="button"
                   onClick={(e) => { e.preventDefault(); e.stopPropagation(); setShareVac(toPosterVacancy(v)); }}
-                  className="absolute top-2 right-2 inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white text-[10px] font-bold shadow-lg shadow-emerald-500/30 z-10 transition-transform hover:scale-105 border border-emerald-300/40"
+                  className="chip absolute top-2 right-2 !text-[10px] !mt-0 !mr-0 z-10 hover:!bg-emerald-500/15 hover:scale-105 transition-transform"
                   data-testid={`vacancy-share-${i}`}
                   title={lang === "hi" ? "पोस्टर बनाएँ और शेयर करें" : "Generate poster & share"}
                   aria-label="Share vacancy poster"
